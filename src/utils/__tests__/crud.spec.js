@@ -1,5 +1,5 @@
 import { getOne, getMany, createOne, updateOne, removeOne } from '../crud'
-import { List } from '../../resources/list/list.model'
+import { Projects } from '../../resources/projects/projects.model'
 import { User } from '../../resources/user/user.model'
 import mongoose from 'mongoose'
 
@@ -30,7 +30,7 @@ describe('crud controllers', () => {
         }
       }
 
-      await getOne(List)(req, res)
+      await getOne(Projects)(req, res)
     })
 
     test('404 if no doc was found', async () => {
@@ -66,10 +66,10 @@ describe('crud controllers', () => {
       expect.assertions(4)
 
       const user = mongoose.Types.ObjectId()
-      await List.create([
-        { name: 'list', createdBy: user },
+      await Projects.create([
+        { name: 'projects', createdBy: user },
         { name: 'other', createdBy: user },
-        { name: 'list', createdBy: mongoose.Types.ObjectId() }
+        { name: 'projects', createdBy: mongoose.Types.ObjectId() }
       ])
 
       const req = {

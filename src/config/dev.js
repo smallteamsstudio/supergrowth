@@ -1,6 +1,6 @@
 export const config = {
   secrets: {
-    jwt: 'superinvitestoken'
+    jwt: 'supergrowthjwtsecret',
   },
-  dbUrl: 'mongodb://localhost:27017/superinvites-db'
+  dbUrl: 'mongodb://localhost:27017/supergrowth',
 }

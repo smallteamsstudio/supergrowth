@@ -1,8 +1,8 @@
 {
-  "name": "superinvites-api",
+  "name": "supergrowth-api",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "SmallTeams Devs",
+  "author": "SmallTeams Developers",
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "cuid": "^2.1.8",

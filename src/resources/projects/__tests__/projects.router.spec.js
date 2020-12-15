@@ -1,6 +1,6 @@
 import router from '../projects.router'
 
-describe('campaign router', () => {
+describe('projects router', () => {
     test('has crud routes', () => {
         const routes = [
             { path: '/', method: 'get' },

@@ -1,15 +1,15 @@
 import { Router } from 'express'
-import controllers from './campaign.controller'
+import controllers from './projects.controllers'
 
 const router = Router()
 
-// api/campaign
+// api/projects
 router.route('/')
     .get(controllers.getOne)
     .get(controllers.getMany)
     .post(controllers.createOne)
 
-// api/campaign/:id
+// api/projects/:id
 router.route('/:id')
     .get(controllers.getOne)
     .put(controllers.updateOne)

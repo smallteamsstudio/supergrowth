@@ -18,14 +18,14 @@ export const verifyToken = token =>
 
 export const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(400).send({ message: 'need email and password' })
+    return res.status(400).send({ message: 'Email and password required' })
   }
-
   try {
     const user = await User.create(req.body)
     const token = newToken(user)
     return res.status(201).send({ token })
   } catch (e) {
+    console.error(e)
     return res.status(500).end()
   }
 }
@@ -62,28 +62,24 @@ export const signin = async (req, res) => {
 
 export const protect = async (req, res, next) => {
   const bearer = req.headers.authorization
-
-  if (!bearer || !bearer.startsWith('Bearer ')) {
+  if (!req.headers.authorization) {
     return res.status(401).end()
   }
-
-  const token = bearer.split('Bearer ')[1].trim()
-  let payload
+  let token = req.headers.authorization.split('Bearer ')[1]
+  if (!token) {
+    return res.status(401).end()
+  }
   try {
-    payload = await verifyToken(token)
+    const payload = await verifyToken(token)
+    console.log(payload)
+    const user = await User.findById(payload.id)
+      .select('-password')
+      .lean()
+      .exec()
+    req.user = user
+    next()
   } catch (e) {
+    console.error(e)
     return res.status(401).end()
   }
-
-  const user = await User.findById(payload.id)
-    .select('-password')
-    .lean()
-    .exec()
-
-  if (!user) {
-    return res.status(401).end()
-  }
-
-  req.user = user
-  next()
 }
